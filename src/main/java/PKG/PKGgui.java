@@ -25,7 +25,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
-import net.sf.tinylaf.Theme;
+//import net.sf.tinylaf.Theme;
+import de.muntjak.tinylookandfeel.Theme;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.DependsOn;
@@ -74,8 +75,8 @@ public class PKGgui extends javax.swing.JFrame {
     public static String [] arrayExport = { "HTML","XML","CSV","XLS" }; 
     public static String [] arrayImport = { "XML","CSV","XLS" }; 
     public static String [] searchArray= {"title","login","description","url"};    
-    public static String Zagolovok="Password Keeper-Generator, build 18-09-18.";
-    private static Dimension frameDimension = new Dimension(640, 480);
+    public static String Zagolovok="Password Keeper+Generator, v1.0.4, build 19-01-21.";
+    private static Dimension frameDimension = new Dimension(702, 480);
     
     public PKGgui() {
         initComponents();
@@ -99,8 +100,8 @@ public class PKGgui extends javax.swing.JFrame {
         this.searchCombo.setModel(new DefaultComboBoxModel<>(searchArray));        
         //this.setResizable(false);
         //this.bcomboNumSymbols.set
-        //this.mReLogin.setVisible(false);
-        //this.bReLogin.setVisible(false);
+        this.mSkin.setVisible(false);
+        this.bSkin.setVisible(false);
     }
     
     @PostConstruct
@@ -187,6 +188,7 @@ public class PKGgui extends javax.swing.JFrame {
         jToolBar7 = new javax.swing.JToolBar();
         bRunGenerate = new javax.swing.JButton();
         bCopyGenerated = new javax.swing.JButton();
+        btnClearGenerate = new javax.swing.JButton();
         jToolBar9 = new javax.swing.JToolBar();
         bExport = new javax.swing.JButton();
         bExportCombo = new javax.swing.JComboBox<>();
@@ -204,6 +206,8 @@ public class PKGgui extends javax.swing.JFrame {
         bShowClipboard = new javax.swing.JButton();
         bAddUser = new javax.swing.JButton();
         bSkin = new javax.swing.JButton();
+        btnAbout = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
         jSplitPane1 = new javax.swing.JSplitPane();
         GeneratorToolBar = new javax.swing.JToolBar();
         jToolBar4 = new javax.swing.JToolBar();
@@ -237,7 +241,7 @@ public class PKGgui extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         mAddUser = new javax.swing.JMenuItem();
-        mChangeLF = new javax.swing.JMenuItem();
+        mSkin = new javax.swing.JMenuItem();
         jMenuItemExit = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItemGenerate = new javax.swing.JMenuItem();
@@ -468,7 +472,7 @@ public class PKGgui extends javax.swing.JFrame {
         });
         jToolBar7.add(bRunGenerate);
 
-        bCopyGenerated.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PKG/img/24x24/copy-login-24.png"))); // NOI18N
+        bCopyGenerated.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PKG/img/24x24/clipboard-blue.png"))); // NOI18N
         bCopyGenerated.setToolTipText("Copy generated to ClipBoard");
         bCopyGenerated.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -476,6 +480,18 @@ public class PKGgui extends javax.swing.JFrame {
             }
         });
         jToolBar7.add(bCopyGenerated);
+
+        btnClearGenerate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PKG/img/24x24/edit_clear.png"))); // NOI18N
+        btnClearGenerate.setToolTipText("clear generator");
+        btnClearGenerate.setFocusable(false);
+        btnClearGenerate.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnClearGenerate.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnClearGenerate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearGenerateActionPerformed(evt);
+            }
+        });
+        jToolBar7.add(btnClearGenerate);
 
         jToolBar10.add(jToolBar7);
 
@@ -623,6 +639,30 @@ public class PKGgui extends javax.swing.JFrame {
         });
         jToolBar12.add(bSkin);
 
+        btnAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PKG/img/24x24/info-book-green.png"))); // NOI18N
+        btnAbout.setToolTipText("about");
+        btnAbout.setFocusable(false);
+        btnAbout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAbout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAboutActionPerformed(evt);
+            }
+        });
+        jToolBar12.add(btnAbout);
+
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PKG/img/24x24/exit.png"))); // NOI18N
+        btnExit.setToolTipText("quit");
+        btnExit.setFocusable(false);
+        btnExit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnExit.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+        jToolBar12.add(btnExit);
+
         jToolBar10.add(jToolBar12);
 
         getContentPane().add(jToolBar10, java.awt.BorderLayout.NORTH);
@@ -752,14 +792,14 @@ public class PKGgui extends javax.swing.JFrame {
         });
         jMenuFile.add(mAddUser);
 
-        mChangeLF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PKG/img/16x16/gnome_color_chooser.png"))); // NOI18N
-        mChangeLF.setText("Change Skin");
-        mChangeLF.addActionListener(new java.awt.event.ActionListener() {
+        mSkin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PKG/img/16x16/gnome_color_chooser.png"))); // NOI18N
+        mSkin.setText("Change Skin");
+        mSkin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mChangeLFActionPerformed(evt);
+                mSkinActionPerformed(evt);
             }
         });
-        jMenuFile.add(mChangeLF);
+        jMenuFile.add(mSkin);
 
         jMenuItemExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PKG/img/16x16/quit.png"))); // NOI18N
         jMenuItemExit.setText("Exit");
@@ -1003,20 +1043,20 @@ public class PKGgui extends javax.swing.JFrame {
     }//GEN-LAST:event_mpCopyClipboardActionPerformed
 
     private void mpShowClipboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mpShowClipboardActionPerformed
-        actions.ShowClipboard(frame);
+        actions.ShowClipboard(this);
     }//GEN-LAST:event_mpShowClipboardActionPerformed
 
     private void mShowClipboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mShowClipboardActionPerformed
-        actions.ShowClipboard(frame);
+        actions.ShowClipboard(this);
     }//GEN-LAST:event_mShowClipboardActionPerformed
 
     private void bShowClipboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bShowClipboardActionPerformed
-        actions.ShowClipboard(frame);
+        actions.ShowClipboard(this);
     }//GEN-LAST:event_bShowClipboardActionPerformed
 
-    private void mChangeLFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mChangeLFActionPerformed
+    private void mSkinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mSkinActionPerformed
         actions.changeLF(frame);
-    }//GEN-LAST:event_mChangeLFActionPerformed
+    }//GEN-LAST:event_mSkinActionPerformed
 
     private void bAddRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddRecordActionPerformed
         //RowAdd ab=new RowAdd(frame,true);
@@ -1219,6 +1259,18 @@ public class PKGgui extends javax.swing.JFrame {
         actions.changeLF(frame);
     }//GEN-LAST:event_bSkinActionPerformed
 
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        actions.quitExit(frame);
+    }//GEN-LAST:event_btnExitActionPerformed
+
+    private void btnAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAboutActionPerformed
+        about();
+    }//GEN-LAST:event_btnAboutActionPerformed
+
+    private void btnClearGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearGenerateActionPerformed
+        TFpassw.setText("");
+    }//GEN-LAST:event_btnClearGenerateActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -1272,6 +1324,9 @@ public class PKGgui extends javax.swing.JFrame {
     private javax.swing.JButton bSkin;
     public static javax.swing.JComboBox bcomboAlphabet;
     public static javax.swing.JComboBox bcomboNumSymbols;
+    private javax.swing.JButton btnAbout;
+    private javax.swing.JButton btnClearGenerate;
+    private javax.swing.JButton btnExit;
     public static javax.swing.JCheckBox checkSpecial;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -1310,7 +1365,6 @@ public class PKGgui extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar9;
     private javax.swing.JMenuItem mAddRecord;
     private javax.swing.JMenuItem mAddUser;
-    private javax.swing.JMenuItem mChangeLF;
     private javax.swing.JMenuItem mClearDB;
     private javax.swing.JMenuItem mClearGenerator;
     private javax.swing.JMenu mClipCpMenu;
@@ -1331,6 +1385,7 @@ public class PKGgui extends javax.swing.JFrame {
     private javax.swing.JPopupMenu mPopupGenerator;
     private javax.swing.JPopupMenu mPopupKeeper;
     private javax.swing.JMenuItem mShowClipboard;
+    private javax.swing.JMenuItem mSkin;
     private javax.swing.JMenuItem mpAddRecord;
     private javax.swing.JMenuItem mpClearDB;
     private javax.swing.JMenuItem mpClearGenerator;

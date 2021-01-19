@@ -56,7 +56,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
-import net.sf.tinylaf.Theme;
+//import net.sf.tinylaf.Theme;
+import de.muntjak.tinylookandfeel.Theme;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -164,6 +165,7 @@ public class Actions {
         tinyTemes.add("lib/themes/My_Magenta.theme");
         tinyTemes.add("lib/themes/My_Green.theme");
         MyInstLF("net.sf.tinylaf.TinyLookAndFeel");
+        MyInstLF("javax.swing.plaf.metal.MetalLookAndFeel");
     }
 
     /*public static void cCopyToClipBoard(String cps) {
