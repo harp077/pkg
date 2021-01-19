@@ -75,7 +75,7 @@ public class PKGgui extends javax.swing.JFrame {
     public static String [] arrayExport = { "HTML","XML","CSV","XLS" }; 
     public static String [] arrayImport = { "XML","CSV","XLS" }; 
     public static String [] searchArray= {"title","login","description","url"};    
-    public static String Zagolovok="Password Keeper+Generator, v1.0.5, build 19-01-21.";
+    public static String Zagolovok="Password Keeper+Generator, v1.0.6, build 19-01-21.";
     private static Dimension frameDimension = new Dimension(702, 480);
     
     public PKGgui() {
