@@ -9,8 +9,8 @@ import static PKG.PKGgui.dd;
 import static PKG.PKGgui.Zagolovok;
 import static PKG.PKGgui.sdf;
 import static PKG.PKGgui.tableModel;
-import com.opencsv.CSVReader;
-import com.opencsv.CSVWriter;
+//import com.opencsv.CSVReader;
+//import com.opencsv.CSVWriter;
 import com.romanenco.configloader.ConfigLoader;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
@@ -58,7 +58,13 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 //import net.sf.tinylaf.Theme;
 import de.muntjak.tinylookandfeel.Theme;
+import java.nio.charset.Charset;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVPrinter;
+import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.csv.QuoteMode;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -680,8 +686,13 @@ public class Actions {
             //rs = null;
             //rs = dbManager.executeQuery("SELECT * FROM hosts");
             ResultSet rs = ejbDaoJDBC.getAllasRS();
-            CSVWriter csv_writer = new CSVWriter(new FileWriter("pkg_" + Actions.login + "_export_" + sdf.format(dd) + ".csv"), ';');
-            csv_writer.writeAll(rs, true); // true = write a header !!! 
+            // OpenCSV:
+            //CSVWriter csv_writer = new CSVWriter(new FileWriter("pkg_" + Actions.login + "_export_" + sdf.format(dd) + ".csv"), ';');
+            //csv_writer.writeAll(rs, true); // true = write a header !!! 
+            // commons-csv:
+            CSVFormat myCsvFormat = CSVFormat.newFormat(';').withDelimiter(';').withRecordSeparator("\n").withQuote('"').withQuoteMode(QuoteMode.ALL_NON_NULL).withNullString(" ").withHeader(rs).withTrim();
+            CSVPrinter csv_writer = new CSVPrinter(new FileWriter("pkg_" + Actions.login + "_export_" + sdf.format(dd) + ".csv"), myCsvFormat); 
+            csv_writer.printRecords(rs);
             csv_writer.flush();
             csv_writer.close();
             //rs.close();
@@ -706,14 +717,27 @@ public class Actions {
                 putf = myf.getSelectedFile().getPath();
                 putd = myf.getSelectedFile() + "";
                 try {
-                    CSVReader reader = new CSVReader(new FileReader(putf), ';');
-                    String[] nextLine;
-                    while ((nextLine = reader.readNext()) != null) {
+                    // OpenCSV:
+                    //CSVReader reader = new CSVReader(new FileReader(putf), ';');
+                    //String[] nextLine;
+                    //while ((nextLine = reader.readNext()) != null) {
+                    // commons-csv:
+                    CSVFormat myCsvFormat = CSVFormat.newFormat(';').withDelimiter(';').withRecordSeparator("\n").withQuote('"').withQuoteMode(QuoteMode.ALL_NON_NULL).withNullString(" ").withTrim();
+                    File file=new File(putf);
+                    CSVParser parser = CSVParser.parse(file, Charset.forName("UTF-8"), myCsvFormat);
+                    for (CSVRecord nextLine : parser.getRecords()) { 
+                        /* OpenCSV:
                         ititle = nextLine[1];
                         ilogin = nextLine[2];
                         ipassw = nextLine[3];
                         idescr = nextLine[4];
-                        iurl = nextLine[5];
+                        iurl = nextLine[5];*/
+                        // commons-csv:
+                        ititle = nextLine.get(1);
+                        ilogin = nextLine.get(2);
+                        ipassw = nextLine.get(3);
+                        idescr = nextLine.get(4);
+                        iurl   = nextLine.get(5);                  
                         if (ititle.isEmpty() && ilogin.isEmpty() && ipassw.isEmpty() && idescr.isEmpty() && iurl.isEmpty()) {
                             return;
                         }
