@@ -69,14 +69,22 @@ public class PKGgui extends javax.swing.JFrame {
         "chars=13",
         "chars=14",
         "chars=15",
-        "chars=16"
+        "chars=16",
+        "chars=17",
+        "chars=18",
+        "chars=19",
+        "chars=20", 
+        "chars=21", 
+        "chars=22", 
+        "chars=23", 
+        "chars=24"        
     };
     public static String [] typeAlphabetArray= {"aA-zZ_0-9","A-Z_0-9","a-z_0-9"};
     public static String [] arrayExport = { "HTML","XML","CSV","XLS" }; 
     public static String [] arrayImport = { "XML","CSV","XLS" }; 
     public static String [] searchArray= {"title","login","description","url"};    
-    public static String Zagolovok="Password Keeper+Generator, v1.0.6, build 19-01-21.";
-    private static Dimension frameDimension = new Dimension(702, 480);
+    public static String Zagolovok="Password Keeper+Generator, v1.0.7, build 02-04-21.";
+    private static Dimension frameDimension = new Dimension(800, 480);
     
     public PKGgui() {
         initComponents();
@@ -189,6 +197,7 @@ public class PKGgui extends javax.swing.JFrame {
         bRunGenerate = new javax.swing.JButton();
         bCopyGenerated = new javax.swing.JButton();
         btnClearGenerate = new javax.swing.JButton();
+        jSeparator18 = new javax.swing.JToolBar.Separator();
         jToolBar9 = new javax.swing.JToolBar();
         bExport = new javax.swing.JButton();
         bExportCombo = new javax.swing.JComboBox<>();
@@ -202,6 +211,7 @@ public class PKGgui extends javax.swing.JFrame {
         bClearDB = new javax.swing.JButton();
         bCpPasswToClip = new javax.swing.JButton();
         bGoURL = new javax.swing.JButton();
+        jSeparator19 = new javax.swing.JToolBar.Separator();
         jToolBar12 = new javax.swing.JToolBar();
         bShowClipboard = new javax.swing.JButton();
         bAddUser = new javax.swing.JButton();
@@ -211,7 +221,11 @@ public class PKGgui extends javax.swing.JFrame {
         jSplitPane1 = new javax.swing.JSplitPane();
         GeneratorToolBar = new javax.swing.JToolBar();
         jToolBar4 = new javax.swing.JToolBar();
+        btnGenerateSmall = new javax.swing.JButton();
         TFpassw = new javax.swing.JTextField();
+        btnCopyGeneratedSmall = new javax.swing.JButton();
+        btnShowClipboardSmall = new javax.swing.JButton();
+        jSeparator20 = new javax.swing.JToolBar.Separator();
         checkSpecial = new javax.swing.JCheckBox();
         jToolBar2 = new javax.swing.JToolBar();
         jSeparator17 = new javax.swing.JToolBar.Separator();
@@ -463,7 +477,7 @@ public class PKGgui extends javax.swing.JFrame {
         jToolBar7.setBorder(javax.swing.BorderFactory.createTitledBorder("Generator"));
         jToolBar7.setFloatable(false);
 
-        bRunGenerate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PKG/img/24x24/play1hot.png"))); // NOI18N
+        bRunGenerate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PKG/img/24x24/Button-Forward-24.png"))); // NOI18N
         bRunGenerate.setToolTipText("Generate Password");
         bRunGenerate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -472,7 +486,7 @@ public class PKGgui extends javax.swing.JFrame {
         });
         jToolBar7.add(bRunGenerate);
 
-        bCopyGenerated.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PKG/img/24x24/clipboard-blue.png"))); // NOI18N
+        bCopyGenerated.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PKG/img/24x24/clipboard-note-add-24.png"))); // NOI18N
         bCopyGenerated.setToolTipText("Copy generated to ClipBoard");
         bCopyGenerated.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -494,6 +508,7 @@ public class PKGgui extends javax.swing.JFrame {
         jToolBar7.add(btnClearGenerate);
 
         jToolBar10.add(jToolBar7);
+        jToolBar10.add(jSeparator18);
 
         jToolBar9.setBorder(javax.swing.BorderFactory.createTitledBorder("Keeper"));
         jToolBar9.setFloatable(false);
@@ -599,6 +614,7 @@ public class PKGgui extends javax.swing.JFrame {
         jToolBar9.add(bGoURL);
 
         jToolBar10.add(jToolBar9);
+        jToolBar10.add(jSeparator19);
 
         jToolBar12.setBorder(javax.swing.BorderFactory.createTitledBorder("System"));
         jToolBar12.setFloatable(false);
@@ -677,10 +693,47 @@ public class PKGgui extends javax.swing.JFrame {
         jToolBar4.setFloatable(false);
         jToolBar4.setRollover(true);
 
+        btnGenerateSmall.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PKG/img/16x16/go-green-krug-16.png"))); // NOI18N
+        btnGenerateSmall.setToolTipText("Generate");
+        btnGenerateSmall.setFocusable(false);
+        btnGenerateSmall.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnGenerateSmall.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnGenerateSmall.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerateSmallActionPerformed(evt);
+            }
+        });
+        jToolBar4.add(btnGenerateSmall);
+
         TFpassw.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
         TFpassw.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         TFpassw.setComponentPopupMenu(mPopupGenerator);
         jToolBar4.add(TFpassw);
+
+        btnCopyGeneratedSmall.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PKG/img/16x16/clipboard_plus.png"))); // NOI18N
+        btnCopyGeneratedSmall.setToolTipText("Copy generated to ClipBoard");
+        btnCopyGeneratedSmall.setFocusable(false);
+        btnCopyGeneratedSmall.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCopyGeneratedSmall.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCopyGeneratedSmall.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCopyGeneratedSmallActionPerformed(evt);
+            }
+        });
+        jToolBar4.add(btnCopyGeneratedSmall);
+
+        btnShowClipboardSmall.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PKG/img/16x16/clipboard_lupa-16.png"))); // NOI18N
+        btnShowClipboardSmall.setToolTipText("Show ClipBoard");
+        btnShowClipboardSmall.setFocusable(false);
+        btnShowClipboardSmall.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnShowClipboardSmall.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnShowClipboardSmall.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowClipboardSmallActionPerformed(evt);
+            }
+        });
+        jToolBar4.add(btnShowClipboardSmall);
+        jToolBar4.add(jSeparator20);
 
         checkSpecial.setText("Use Special symbols");
         checkSpecial.setFocusable(false);
@@ -1271,6 +1324,18 @@ public class PKGgui extends javax.swing.JFrame {
         TFpassw.setText("");
     }//GEN-LAST:event_btnClearGenerateActionPerformed
 
+    private void btnCopyGeneratedSmallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCopyGeneratedSmallActionPerformed
+        this.CopyCP();
+    }//GEN-LAST:event_btnCopyGeneratedSmallActionPerformed
+
+    private void btnGenerateSmallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateSmallActionPerformed
+        BLogic.generate(checkSpecial.isSelected(),bcomboAlphabet.getSelectedItem().toString(),Integer.parseInt(bcomboNumSymbols.getSelectedItem().toString().split("=")[1]), TFpassw);
+    }//GEN-LAST:event_btnGenerateSmallActionPerformed
+
+    private void btnShowClipboardSmallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowClipboardSmallActionPerformed
+        actions.ShowClipboard(this);
+    }//GEN-LAST:event_btnShowClipboardSmallActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -1326,7 +1391,10 @@ public class PKGgui extends javax.swing.JFrame {
     public static javax.swing.JComboBox bcomboNumSymbols;
     private javax.swing.JButton btnAbout;
     private javax.swing.JButton btnClearGenerate;
+    public static javax.swing.JButton btnCopyGeneratedSmall;
     private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnGenerateSmall;
+    public static javax.swing.JButton btnShowClipboardSmall;
     public static javax.swing.JCheckBox checkSpecial;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -1347,7 +1415,10 @@ public class PKGgui extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator15;
     private javax.swing.JToolBar.Separator jSeparator16;
     private javax.swing.JToolBar.Separator jSeparator17;
+    private javax.swing.JToolBar.Separator jSeparator18;
+    private javax.swing.JToolBar.Separator jSeparator19;
     private javax.swing.JToolBar.Separator jSeparator2;
+    private javax.swing.JToolBar.Separator jSeparator20;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JPopupMenu.Separator jSeparator5;
